@@ -8,8 +8,10 @@ import com.ead.authuser.models.UserModel;
 import com.ead.authuser.repositories.UserRepository;
 import com.ead.authuser.services.UserService;
 import org.springframework.beans.BeanUtils;
+import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.List;
@@ -71,6 +73,14 @@ public class UserServiceImpl implements UserService {
         userModel.setFullName(userRecordDto.fullName());
         userModel.setPhoneNumber(userRecordDto.phoneNumber());
         userModel.setLastUpdateDate(LocalDateTime.now(ZoneId.of("UTC")));
+        return userRepository.save(userModel);
+    }
+
+    @Override
+    public UserModel updatePassword(UserRecordDto userRecordDto, UserModel userModel) {
+        userModel.setPassword(userRecordDto.password());
+        userModel.setLastUpdateDate(LocalDateTime.now(ZoneId.of("UTC")));
+
         return userRepository.save(userModel);
     }
 }

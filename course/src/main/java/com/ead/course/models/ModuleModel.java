@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Set;
 import java.util.UUID;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -32,6 +33,10 @@ public class ModuleModel implements Serializable {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @ManyToOne(optional = false)
     private CourseModel course;
+
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @OneToMany(mappedBy = "module")
+    private Set<LessonModel> lessons;
 
     public UUID getModuleId() {
         return moduleId;
@@ -71,5 +76,13 @@ public class ModuleModel implements Serializable {
 
     public void setCourse(CourseModel course) {
         this.course = course;
+    }
+
+    public Set<LessonModel> getLessons() {
+        return lessons;
+    }
+
+    public void setLessons(Set<LessonModel> lessons) {
+        this.lessons = lessons;
     }
 }

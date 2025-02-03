@@ -41,4 +41,10 @@ public class CourseController {
     public ResponseEntity<Object> getOneCourse(@PathVariable(value = "courseId") UUID courseId) {
         return ResponseEntity.status(HttpStatus.OK).body(courseService.findById(courseId).get());
     }
+
+    @DeleteMapping("/{courseId}")
+    public ResponseEntity<Object> deleteCourse(@PathVariable(value = "courseId") UUID courseId) {
+        courseService.delete(courseService.findById(courseId).get());
+        return ResponseEntity.status(HttpStatus.OK).body("Course deleted successfully.");
+    }
 }

@@ -47,4 +47,11 @@ public class CourseController {
         courseService.delete(courseService.findById(courseId).get());
         return ResponseEntity.status(HttpStatus.OK).body("Course deleted successfully.");
     }
+
+    @PutMapping("/{courseId}")
+    public ResponseEntity<Object> updateCourse(@PathVariable(value = "courseId") UUID courseId,
+                                               @RequestBody @Valid CourseRecordDto courseRecordDto) {
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(courseService.update(courseRecordDto, courseService.findById(courseId).get()));
+    }
 }

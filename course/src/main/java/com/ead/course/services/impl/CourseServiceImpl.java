@@ -80,4 +80,11 @@ public class CourseServiceImpl implements CourseService {
         }
         return courseModelOptional;
     }
+
+    @Override
+    public CourseModel update(CourseRecordDto courseRecordDto, CourseModel courseModel) {
+        BeanUtils.copyProperties(courseRecordDto, courseModel);
+        courseModel.setLastUpdateDate(LocalDateTime.now(ZoneId.of("UTC")));
+        return courseRepository.save(courseModel);
+    }
 }

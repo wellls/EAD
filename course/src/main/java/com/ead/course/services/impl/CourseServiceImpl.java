@@ -15,6 +15,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class CourseServiceImpl implements CourseService {
@@ -63,5 +65,19 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public boolean existsByName(String name) {
         return courseRepository.existsByName(name);
+    }
+
+    @Override
+    public List<CourseModel> findAll() {
+        return courseRepository.findAll();
+    }
+
+    @Override
+    public Optional<CourseModel> findById(UUID courseId) {
+        Optional<CourseModel> courseModelOptional = courseRepository.findById(courseId);
+        if(courseModelOptional.isEmpty()) {
+            //exception!!
+        }
+        return courseModelOptional;
     }
 }

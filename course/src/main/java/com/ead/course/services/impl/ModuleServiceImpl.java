@@ -61,4 +61,10 @@ public class ModuleServiceImpl implements ModuleService {
         }
         return moduleModelOptional;
     }
+
+    @Override
+    public ModuleModel update(ModuleRecordDto moduleRecordDto, ModuleModel moduleModel) {
+        BeanUtils.copyProperties(moduleRecordDto, moduleModel);
+        return moduleRepository.save(moduleModel);
+    }
 }

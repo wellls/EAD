@@ -1,5 +1,6 @@
 package com.ead.course.controllers;
 
+import com.ead.course.dtos.CourseRecordDto;
 import com.ead.course.dtos.ModuleRecordDto;
 import com.ead.course.models.CourseModel;
 import com.ead.course.models.ModuleModel;
@@ -49,6 +50,14 @@ public class ModuleController {
                                                @PathVariable(value = "moduleId") UUID moduleId) {
         moduleService.delete(moduleService.findModuleIntoCourse(courseId, moduleId).get());
         return ResponseEntity.status(HttpStatus.OK).body("Module deleted successfully.");
+    }
+
+    @PutMapping("/courses/{courseId}/modules/{moduleId}")
+    public ResponseEntity<Object> updateModule(@PathVariable(value = "courseId") UUID courseId,
+                                               @PathVariable(value = "moduleId") UUID moduleId,
+                                               @RequestBody @Valid ModuleRecordDto moduleRecordDto) {
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(moduleService.update(moduleRecordDto, moduleService.findModuleIntoCourse(courseId, moduleId).get()));
     }
 
 }

@@ -14,4 +14,5 @@ public interface ModuleService {
     ModuleModel save(@Valid ModuleRecordDto moduleRecordDto, CourseModel courseModel);
     List<ModuleModel> findAllModulesIntoCourse(UUID courseId);
     Optional<ModuleModel> findModuleIntoCourse(UUID courseId, UUID moduleId);
+    ModuleModel update(@Valid ModuleRecordDto moduleRecordDto, ModuleModel moduleModel);
 }

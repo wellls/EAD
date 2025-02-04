@@ -14,6 +14,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class ModuleServiceImpl implements ModuleService {
@@ -44,5 +46,19 @@ public class ModuleServiceImpl implements ModuleService {
         moduleModel.setCourse(courseModel);
 
         return moduleRepository.save(moduleModel);
+    }
+
+    @Override
+    public List<ModuleModel> findAllModulesIntoCourse(UUID courseId) {
+        return moduleRepository.findAllModulesIntoCourse(courseId);
+    }
+
+    @Override
+    public Optional<ModuleModel> findModuleIntoCourse(UUID courseId, UUID moduleId) {
+        Optional<ModuleModel> moduleModelOptional = moduleRepository.findModuleIntoCourse(courseId, moduleId);
+        if(moduleModelOptional.isEmpty()) {
+            //exception!!
+        }
+        return moduleModelOptional;
     }
 }

@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.util.List;
+import java.util.UUID;
 
 @Service
 public class LessonServiceImpl implements LessonService {
@@ -28,5 +30,10 @@ public class LessonServiceImpl implements LessonService {
         lessonModel.setModule(moduleModel);
 
         return lessonRepository.save(lessonModel);
+    }
+
+    @Override
+    public List<LessonModel> findAllLessonsIntoModule(UUID moduleId) {
+        return lessonRepository.findAllLessonsIntoModule(moduleId);
     }
 }

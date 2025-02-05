@@ -38,4 +38,11 @@ public class LessonController {
                 .body(lessonService.findAllLessonsIntoModule(moduleId));
     }
 
+    @GetMapping("modules/{moduleId}/lessons/{lessonId}")
+    public ResponseEntity<Object> getOneLesson(@PathVariable(value = "moduleId") UUID moduleId,
+                                               @PathVariable(value = "lessonId") UUID lessonId) {
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(lessonService.findLessonIntoModule(moduleId, lessonId).get());
+    }
+
 }

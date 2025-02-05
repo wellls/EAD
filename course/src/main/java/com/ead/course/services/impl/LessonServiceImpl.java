@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -35,5 +36,14 @@ public class LessonServiceImpl implements LessonService {
     @Override
     public List<LessonModel> findAllLessonsIntoModule(UUID moduleId) {
         return lessonRepository.findAllLessonsIntoModule(moduleId);
+    }
+
+    @Override
+    public Optional<LessonModel> findLessonIntoModule(UUID moduleId, UUID lessonId) {
+        Optional<LessonModel> lessonModelOptional = lessonRepository.findLessonIntoModule(moduleId, lessonId);
+        if(lessonModelOptional.isEmpty()) {
+            //exception!!!
+        }
+        return lessonModelOptional;
     }
 }

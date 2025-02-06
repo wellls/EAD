@@ -13,4 +13,5 @@ public interface LessonService {
     LessonModel save(@Valid LessonRecordDto lessonRecordDto, ModuleModel moduleModel);
     List<LessonModel> findAllLessonsIntoModule(UUID moduleId);
     Optional<LessonModel> findLessonIntoModule(UUID moduleId, UUID lessonId);
+    void delete(LessonModel lessonModel);
 }

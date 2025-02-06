@@ -45,4 +45,11 @@ public class LessonController {
                 .body(lessonService.findLessonIntoModule(moduleId, lessonId).get());
     }
 
+    @DeleteMapping("modules/{moduleId}/lessons/{lessonId}")
+    public ResponseEntity<Object> deleteLesson(@PathVariable(value = "moduleId") UUID moduleId,
+                                               @PathVariable(value = "lessonId") UUID lessonId) {
+        lessonService.delete(lessonService.findLessonIntoModule(moduleId, lessonId).get());
+        return ResponseEntity.status(HttpStatus.OK).body("Lesson deleted successfully.");
+    }
+
 }

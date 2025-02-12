@@ -7,11 +7,13 @@ import com.ead.course.models.ModuleModel;
 import com.ead.course.repositories.LessonRepository;
 import com.ead.course.services.LessonService;
 import org.springframework.beans.BeanUtils;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -35,11 +37,6 @@ public class LessonServiceImpl implements LessonService {
     }
 
     @Override
-    public List<LessonModel> findAllLessonsIntoModule(UUID moduleId) {
-        return lessonRepository.findAllLessonsIntoModule(moduleId);
-    }
-
-    @Override
     public Optional<LessonModel> findLessonIntoModule(UUID moduleId, UUID lessonId) {
         Optional<LessonModel> lessonModelOptional = lessonRepository.findLessonIntoModule(moduleId, lessonId);
         if(lessonModelOptional.isEmpty()) {
@@ -57,5 +54,10 @@ public class LessonServiceImpl implements LessonService {
     public LessonModel update(LessonRecordDto lessonRecordDto, LessonModel lessonModel) {
         BeanUtils.copyProperties(lessonRecordDto, lessonModel);
         return lessonRepository.save(lessonModel);
+    }
+
+    @Override
+    public Page<LessonModel> findAllLessonsIntoModule(Specification<LessonModel> spec, Pageable pageable) {
+        return lessonRepository.findAll(spec, pageable);
     }
 }

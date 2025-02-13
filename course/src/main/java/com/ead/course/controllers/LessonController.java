@@ -1,9 +1,7 @@
 package com.ead.course.controllers;
 
 import com.ead.course.dtos.LessonRecordDto;
-import com.ead.course.dtos.ModuleRecordDto;
 import com.ead.course.models.LessonModel;
-import com.ead.course.models.ModuleModel;
 import com.ead.course.services.LessonService;
 import com.ead.course.services.ModuleService;
 import com.ead.course.specifications.SpecificationTemplate;
